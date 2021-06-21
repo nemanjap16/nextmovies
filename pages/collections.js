@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import MainHeader from "../components/MainHeader";
 import Thumbnail from "../components/Thumbnail";
 import Link from "next/link";
 import Head from "next/head";
@@ -21,11 +20,11 @@ export default function Collections() {
         <meta name="description" content="Next Movie App" />
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
       </Head>
-      <MainHeader />
+
       <h2 className="text-3xl mt-8 uppercase opacity-50 text-center font-bold tracking-wider">
         Watchlist
       </h2>
-      <div className="p-5 my-12 sm:grid md:grid-cols-2 xl:grid-cols-4 3xl:flex flex-wrap justify-center">
+      <div className="p-5 my-12 sm:grid md:grid-cols-2 xl:grid-cols-4">
         {movies.map((movie) => (
           <Link key={movie.id} href={`/movie/${movie.id}`}>
             <a>

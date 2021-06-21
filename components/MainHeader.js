@@ -12,11 +12,11 @@ import {
 export default function Header() {
   const router = useRouter();
   return (
-    <header className="flex flex-col-reverse items-center md:flex-row justify-between">
+    <header className="mt-4 lg:mt-0 flex flex-col-reverse items-center sm:flex-row">
       <div className="mb-4 md:mb-0 group">
         <Link href="/">
           <a>
-            <h1 className="text-green-400 cursor-pointer uppercase text-3xl font-bold italic tracking-wide">
+            <h1 className="text-green-400 cursor-pointer uppercase text-3xl font-bold tracking-wide">
               next
               <span className="uppercase text-gray-200">movies</span>
             </h1>

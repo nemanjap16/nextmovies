@@ -8,6 +8,9 @@ module.exports = {
         input: "#12485e",
         background: "#06202a",
       },
+      container: {
+        center: true,
+      },
       screens: {
         "3xl": "2000px",
       },

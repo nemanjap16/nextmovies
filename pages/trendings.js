@@ -1,5 +1,4 @@
 import Head from "next/head";
-import MainHeader from "../components/MainHeader";
 import ShowMovies from "../components/ShowMovies";
 import Nav from "../components/Nav";
 import movieRequest from "../utility/movieRequests";
@@ -17,7 +16,6 @@ export default function Trendings({ items }) {
         <meta name="description" content="Next Movie App" />
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
       </Head>
-      <MainHeader />
       <Nav />
       <ShowMovies movies={movies} />
     </div>

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import MainHeader from "../../components/MainHeader";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -46,29 +45,23 @@ export default function Details({ movie }) {
   };
 
   return (
-    <div className="shadow-md">
+    <div>
       <Head>
         <title>Next Movie App</title>
         <meta name="description" content="Next Movie App" />
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
       </Head>
-      <MainHeader />
-      <div
-        style={{ minHeight: "500px", width: "100%" }}
-        className="bg-input w-full mt-6 overflow-hidden flex"
-      >
-        <div
-          style={{ minWidth: "35%", maxHeight: "600px" }}
-          className="relative inline-block bg-red-400"
-        >
+
+      <div className="bg-input mt-6 overflow-hidden grid grid-rows-1  lg:grid-cols-3">
+        <div className="object-cover h-96 lg:h-auto relative lg:col-span-1 bg-red-400">
           <Image
             layout="fill"
             src={imageUrl}
             loading={"eager"}
-            className="object-cover"
+            className="object-cover absolute"
           />
         </div>
-        <div style={{ minWidth: "65%", minHeight: "500px" }} className="p-10">
+        <div className="p-10 lg:col-span-2">
           <h1 className="text-2xl uppercase font-bold">
             {movie.original_title}
           </h1>
@@ -90,10 +83,11 @@ export default function Details({ movie }) {
             Runtime: {movie.runtime ? movie.runtime : "-"} min.
           </p>
           <hr className="mt-4" />
-          <div className="flex mt-8 items-center justify-between">
+          {/*  */}
+          <div className="w-full grid grid-cols-1 justify-items-center md:flex items-center  justify-between  mt-8">
             <div
               style={{ width: "70px", height: "70px" }}
-              className="bg-green-900 rounded-full p-1 font-bold"
+              className="bg-green-900 rounded-full p-1 font-bold inline-block mb-4 md:mb-0"
             >
               <CircularProgressbar
                 value={popularity}
@@ -106,18 +100,19 @@ export default function Details({ movie }) {
                 })}
               />
             </div>
-            <div>
+            <div className="grid grid-cols-1 justify-items-center md:flex ">
               <button
                 disabled={disabled}
                 onClick={() => addToWatchlist()}
-                className="button text-xs outline-none disabled:opacity-50"
+                className="button text-xs md:text-base outline-none md:mr-10 mb-5 md:mb-0 disabled:opacity-50"
               >
                 Add to watchlist
               </button>
 
               <button
+                disabled={!disabled}
                 onClick={() => removeFromWatchlist()}
-                className="button text-xs outline-none"
+                className="button text-xs md:text-base outline-none disabled:opacity-50"
               >
                 Remove from watclist
               </button>

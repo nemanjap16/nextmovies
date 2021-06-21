@@ -1,5 +1,4 @@
 import Head from "next/head";
-import MainHeader from "../components/MainHeader";
 import SearchBar from "../components/SearchBar";
 import ShowMovies from "../components/ShowMovies";
 
@@ -12,7 +11,6 @@ export default function SearchMovies({ movies }) {
           <meta name="description" content="Next Movie App" />
           <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
         </Head>
-        <MainHeader />
         <SearchBar />
         <ShowMovies movies={movies} />
       </div>
@@ -25,7 +23,7 @@ export default function SearchMovies({ movies }) {
           <meta name="description" content="Next Movie App" />
           <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
         </Head>
-        <MainHeader />
+
         <SearchBar />
         <h1 className="text-xl sm:text-4xl mt-40 uppercase opacity-50 italic text-center font-extrabold tracking-wider">
           search for movie...
