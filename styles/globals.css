@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply container bg-background text-gray-300 md:p-8 lg:p-8  max-w-screen-2xl;
+    @apply container bg-background text-gray-300 md:p-8  max-w-screen-2xl;
   }
 
   .button {
@@ -15,9 +15,10 @@
 /* slider style */
 
 .slider {
-  /* position: relative; */
-  max-height: 500px;
-  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  height: auto;
+  width: 80%;
 }
 
 .wrapper {
@@ -45,11 +46,13 @@
 }
 
 .slider > .slick-next {
+  position: absolute;
   right: 50px;
   z-index: 10;
 }
 
 .slider > .slick-prev {
+  position: absolute;
   left: 50px;
   z-index: 10;
 }
