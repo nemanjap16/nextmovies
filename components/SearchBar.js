@@ -4,7 +4,6 @@ export default function SearchBar() {
   const router = useRouter();
 
   const submitSearch = (e) => {
-    console.log(e);
     if (e.code === "Enter" || e.key === "Enter" || e.charCode === 13) {
       router.push(`movies/?movie_name=${e.target.value}`);
     }

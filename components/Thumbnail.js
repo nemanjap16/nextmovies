@@ -1,5 +1,16 @@
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addMovie, removeMovie, selectMovies } from "../store/collectionSlice";
 import Image from "next/image";
-import { ThumbUpIcon } from "@heroicons/react/outline";
+import {
+  ThumbUpIcon,
+  BookmarkIcon,
+  CollectionIcon,
+} from "@heroicons/react/outline";
+import { HeartIcon } from "@heroicons/react/solid";
+import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Thumbnail({ movie, index }) {
   const BASE_PATH = `https://image.tmdb.org/t/p/w500`;
@@ -7,20 +18,82 @@ export default function Thumbnail({ movie, index }) {
     ? `${BASE_PATH}${movie.backdrop_path}`
     : `/movie.jpg`;
 
+  const [show, setShow] = useState(false);
+
+  const { moviesCollection } = useSelector(selectMovies);
+
+  useEffect(() => {
+    if (moviesCollection) {
+      moviesCollection.map((item) => {
+        if (item.original_title === movie.original_title) {
+          setShow(true);
+        }
+      });
+    }
+    return () => {};
+  }, [moviesCollection]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!moviesCollection == []) {
+      localStorage.setItem("movies", JSON.stringify(moviesCollection));
+    }
+    let storedMovies = moviesCollection.find((el) => el.id === movie.id);
+    let inCollection = storedMovies ? true : false;
+    setShow(inCollection);
+  }, [moviesCollection]);
+
+  const addToWatchlist = (movie) => {
+    dispatch(addMovie(movie));
+    toast.success("Added to watch list");
+  };
+
+  const removeFromWatchlist = (id) => {
+    dispatch(removeMovie(id));
+    toast.warning("Removed from watch list");
+  };
+
   if (movie) {
     return (
-      <div className="group h-auto rounded-md  bg-input overflow-hidden cursor-pointer m-3 transition duration-150 ease-in-out transform sm:hover:scale-105 hover:z-10">
-        <Image layout="responsive" src={imageUrl} width={1920} height={1080} />
-
-        <div className="px-4 py-4 h-40 relative">
-          <h2 className="text-sm sm:text-xl  mb-2 transition-all duration-150 easy-in-out">
-            {movie.title || movie.original_name}
-          </h2>
-          <p className="text-gray-400 truncate mb-5">{movie.overview}</p>
-          <p className="flex transition-all duration-150 easy-in-out float-right absolute bottom-3 right-4">
-            <ThumbUpIcon className="h-5 mr-2" />
-            {movie.vote_count}
-          </p>
+      <div>
+        <ToastContainer autoClose={3000} />
+        <div className="relative h-auto rounded-md  bg-input overflow-hidden m-3 transition duration-150 ease-in-out transform sm:hover:scale-105 hover:z-10">
+          <Image layout="responsive" src={imageUrl} width={500} height={300} />
+          <div className="px-4 py-4 h-auto">
+            <h2 className="text-sm sm:text-xl  mb-2 truncate">
+              {movie.title || movie.original_name}
+            </h2>
+            <p className="text-gray-400 truncate">{movie.overview}</p>
+            <div className="flex justify-between items-center mt-8">
+              <div className="flex items-center">
+                <HeartIcon className="h-5 mr-2" style={{ color: "tomato" }} />
+                {movie.vote_average
+                  ? movie.vote_average.toString().replace(".", "")
+                  : null}
+                %
+              </div>
+              <div className="flex items-center">
+                <ThumbUpIcon className="h-5 mr-2" />
+                {movie.vote_count}
+              </div>
+              {show ? (
+                <CollectionIcon
+                  style={{ color: "tomato" }}
+                  className="h-5 cursor-pointer"
+                  onClick={() => removeFromWatchlist(movie.id)}
+                />
+              ) : (
+                <BookmarkIcon
+                  className="h-5 cursor-pointer"
+                  onClick={() => addToWatchlist(movie)}
+                />
+              )}
+            </div>
+          </div>
+          <Link key={movie.id} href={`/movie/${movie.id}`}>
+            <button style={style.button}>Show More</button>
+          </Link>
         </div>
       </div>
     );
@@ -28,3 +101,15 @@ export default function Thumbnail({ movie, index }) {
     return <div>Loading...</div>;
   }
 }
+
+const style = {
+  button: {
+    padding: "10px",
+    backgroundColor: "#ccc",
+    color: "#333",
+    margin: "0 auto",
+    width: "100%",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+};

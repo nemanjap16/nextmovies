@@ -4,55 +4,10 @@
 
 @layer base {
   body {
-    @apply container bg-background text-gray-300 md:p-8  max-w-screen-2xl;
+    @apply min-h-screen container bg-background text-gray-300 md:p-8  max-w-screen-2xl;
   }
 
   .button {
-    @apply bg-gray-900 px-5 py-3 rounded-md focus:opacity-75 focus:outline-none;
+    @apply bg-cyan-800 px-5 py-3 rounded-md focus:opacity-75 focus:outline-none;
   }
-}
-
-/* slider style */
-
-.slider {
-  position: relative;
-  margin: 0 auto;
-  height: auto;
-  width: 80%;
-}
-
-.wrapper {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-}
-
-.wrapper img {
-  display: block;
-  height: auto;
-  width: 100%;
-}
-
-.slider > ul li button::before {
-  color: white;
-  font-size: 11px;
-  margin-top: 15px;
-}
-
-.slider > ul li.slick-active button::before {
-  color: white;
-  margin-top: 15px;
-}
-
-.slider > .slick-next {
-  position: absolute;
-  right: 50px;
-  z-index: 10;
-}
-
-.slider > .slick-prev {
-  position: absolute;
-  left: 50px;
-  z-index: 10;
 }

@@ -1,4 +1,3 @@
-// import env from "../utility/env";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import HeaderItems from "./HeaderItems";

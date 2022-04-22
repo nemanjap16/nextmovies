@@ -3,11 +3,11 @@ const api_key = process.env.API_KEY;
 export default {
   trending: {
     title: "Trending",
-    url: `/trending/all/week?api_key=${api_key}&langugae=en-US`,
+    url: `/trending/all/week?api_key=${api_key}&language=en-US`,
   },
   top_rated: {
     title: "Top Rated",
-    url: `/movie/top_rated?api_key=${api_key}&langugae=en-US`,
+    url: `/movie/top_rated?api_key=${api_key}&language=en-US`,
   },
   action_movies: {
     title: "Action",

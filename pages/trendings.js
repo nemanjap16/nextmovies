@@ -12,10 +12,13 @@ export default function Trendings({ items }) {
   return (
     <div>
       <Head>
-        <title>Trendings</title>
         <meta name="description" content="Next Movie App" />
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
+        <title>Trendings</title>
       </Head>
+      <h1 className="text-xl sm:text-4xl uppercase opacity-50 text-center font-extrabold tracking-wider">
+        trendings
+      </h1>
       <Nav />
       <ShowMovies movies={movies} />
     </div>

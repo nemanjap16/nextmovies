@@ -10,6 +10,8 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Details({ movie }) {
   const BASE_PATH = `https://image.tmdb.org/t/p/original`;
@@ -36,24 +38,29 @@ export default function Details({ movie }) {
 
   const addToWatchlist = () => {
     dispatch(addMovie(movie));
-    router.push("/collections");
+    toast.success("Added to watch list");
   };
 
   const removeFromWatchlist = () => {
     dispatch(removeMovie(movie.id));
-    router.push("/collections");
+    toast.warning("Removed from watch list");
   };
 
   return (
-    <div>
+    <div className="h-full grid">
+      <ToastContainer autoClose={3000} />
       <Head>
         <title>Next Movie App</title>
         <meta name="description" content="Next Movie App" />
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
       </Head>
 
-      <div className="bg-input mt-6 overflow-hidden grid grid-rows-1  lg:grid-cols-3">
-        <div className="object-cover h-96 lg:h-auto relative lg:col-span-1 bg-red-400">
+      <h1 className="text-xl sm:text-4xl uppercase opacity-50 text-center font-extrabold tracking-wider">
+        movie details
+      </h1>
+
+      <div className="bg-input mt-6 rounded-md overflow-hidden grid grid-rows-1  lg:grid-cols-3">
+        <div className="object-cover h-96 lg:h-auto relative lg:col-span-1 bg-green-700">
           <Image
             layout="fill"
             src={imageUrl}
@@ -87,7 +94,7 @@ export default function Details({ movie }) {
           <div className="w-full grid grid-cols-1 justify-items-center md:flex items-center  justify-between  mt-8">
             <div
               style={{ width: "70px", height: "70px" }}
-              className="bg-green-900 rounded-full p-1 font-bold inline-block mb-4 md:mb-0"
+              className="bg-green-900 rounded-full p-1 font-bold mb-4 md:mb-0 grid place-items-center"
             >
               <CircularProgressbar
                 value={popularity}
@@ -106,7 +113,7 @@ export default function Details({ movie }) {
                 onClick={() => addToWatchlist()}
                 className="button text-xs md:text-base outline-none md:mr-10 mb-5 md:mb-0 disabled:opacity-50"
               >
-                Add to watchlist
+                Add to watch list
               </button>
 
               <button
@@ -114,15 +121,32 @@ export default function Details({ movie }) {
                 onClick={() => removeFromWatchlist()}
                 className="button text-xs md:text-base outline-none disabled:opacity-50"
               >
-                Remove from watclist
+                Remove from watch list
               </button>
             </div>
           </div>
         </div>
       </div>
+      <button
+        style={style.button}
+        className="mt-8 text-xl cursor-pointer"
+        onClick={() => router.back()}
+      >
+        &larr; Back
+      </button>
     </div>
   );
 }
+
+const style = {
+  button: {
+    width: "100px",
+    padding: "10px",
+    backgroundColor: "#12485e",
+    marginLeft: "auto",
+    borderRadius: "6px",
+  },
+};
 
 export async function getServerSideProps(context) {
   try {
