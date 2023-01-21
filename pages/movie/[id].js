@@ -47,7 +47,7 @@ export default function Details({ movie }) {
   };
 
   return (
-    <div className="h-full grid">
+    <div className="h-full grid p-5">
       <ToastContainer autoClose={3000} />
       <Head>
         <title>Next Movie App</title>
@@ -98,10 +98,10 @@ export default function Details({ movie }) {
             >
               <CircularProgressbar
                 value={popularity}
-                text={`${popularity}%`}
+                text={`${popularity.toFixed(2)}%`}
                 styles={buildStyles({
                   pathTransitionDuration: 0.5,
-                  textSize: "24px",
+                  textSize: "20px",
                   textColor: "#fff",
                   pathColor: "#21d07a",
                 })}

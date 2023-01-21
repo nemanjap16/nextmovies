@@ -5,8 +5,8 @@ import ShowMovies from "../components/ShowMovies";
 
 export default function Home({ movies }) {
   const BASE_PATH = `https://image.tmdb.org/t/p/original`;
-  const imageUrl = movies[0].backdrop_path
-    ? `${BASE_PATH}${movies[0].backdrop_path}`
+  const imageUrl = movies[0]?.backdrop_path
+    ? `${BASE_PATH}${movies[0]?.backdrop_path}`
     : `/movie.jpg`;
   return (
     <div className="h-full">
@@ -15,9 +15,6 @@ export default function Home({ movies }) {
         <meta name="description" content="Next Movie App" />
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
       </Head>
-      <h1 className="text-xl sm:text-4xl uppercase opacity-50 text-center font-extrabold tracking-wider">
-        movies
-      </h1>
       <ShowMovies movies={movies} />
     </div>
   );

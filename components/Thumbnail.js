@@ -5,7 +5,7 @@ import Image from "next/image";
 import {
   ThumbUpIcon,
   BookmarkIcon,
-  CollectionIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/outline";
 import { HeartIcon } from "@heroicons/react/solid";
 import Link from "next/link";
@@ -67,25 +67,25 @@ export default function Thumbnail({ movie, index }) {
             <p className="text-gray-400 truncate">{movie.overview}</p>
             <div className="flex justify-between items-center mt-8">
               <div className="flex items-center">
-                <HeartIcon className="h-5 mr-2" style={{ color: "tomato" }} />
-                {movie.vote_average
-                  ? movie.vote_average.toString().replace(".", "")
-                  : null}
-                %
+                <HeartIcon className="h-5 mr-2" style={{ color: "cyan" }} />
+                <span className="font-bold">
+                  {movie.vote_average ? movie.vote_average.toFixed(1) : null}
+                </span>
               </div>
               <div className="flex items-center">
                 <ThumbUpIcon className="h-5 mr-2" />
                 {movie.vote_count}
               </div>
               {show ? (
-                <CollectionIcon
-                  style={{ color: "tomato" }}
-                  className="h-5 cursor-pointer"
+                <CheckCircleIcon
+                  style={{ color: "cyan" }}
+                  className="h-6 cursor-pointer"
                   onClick={() => removeFromWatchlist(movie.id)}
                 />
               ) : (
                 <BookmarkIcon
                   className="h-5 cursor-pointer"
+                  style={{ color: "cyan" }}
                   onClick={() => addToWatchlist(movie)}
                 />
               )}
@@ -105,11 +105,12 @@ export default function Thumbnail({ movie, index }) {
 const style = {
   button: {
     padding: "10px",
-    backgroundColor: "#ccc",
-    color: "#333",
+    backgroundColor: "green",
+    color: "#fff",
     margin: "0 auto",
     width: "100%",
     cursor: "pointer",
     fontWeight: "bold",
+    borderRadius: "6px",
   },
 };

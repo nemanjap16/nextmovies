@@ -16,9 +16,9 @@ export default function Trendings({ items }) {
         <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
         <title>Trendings</title>
       </Head>
-      <h1 className="text-xl sm:text-4xl uppercase opacity-50 text-center font-extrabold tracking-wider">
+      {/* <h1 className="text-xl sm:text-4xl uppercase opacity-50 text-center font-extrabold tracking-wider">
         trendings
-      </h1>
+      </h1> */}
       <Nav />
       <ShowMovies movies={movies} />
     </div>
