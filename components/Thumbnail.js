@@ -45,13 +45,21 @@ export default function Thumbnail({ movie, index }) {
   }, [moviesCollection]);
 
   const addToWatchlist = (movie) => {
-    dispatch(addMovie(movie));
-    toast.success("Added to watch list");
+    if (movie) {
+      dispatch(addMovie(movie));
+      toast.success("Added to watch list");
+    } else {
+      toast.warning("Something went wrong!");
+    }
   };
 
   const removeFromWatchlist = (id) => {
-    dispatch(removeMovie(id));
-    toast.warning("Removed from watch list");
+    if (id !== "") {
+      dispatch(removeMovie(id));
+      toast.warning("Removed from watch list");
+    } else {
+      toast.warning("Something went wrong!");
+    }
   };
 
   if (movie) {
